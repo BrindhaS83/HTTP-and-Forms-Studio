@@ -2,11 +2,48 @@
 
 <head>
 	<meta charset="utf-8">
+	<link rel = "stylesheet" href="styles.css">
 	<script>
 		// TODO: create a handler
-    window.addEventListener("load", function(){
+		function setSearchEngine(){
+			let querySelect = document.querySelector("input[name=engine]:checked");
+			let searchTxt = document.querySelector("input[name=q]");
+
+			if( searchTxt.value === '' || querySelect === null ){
+				alert('You need to provide search text and search engine!')
+				event.preventDefault();
+				return;
+
+			}
+
+			let actions = {
+   					"google":"https://www.google.com/",
+					"duckDuckGo": "https://duckduckgo.com/",
+				  	"bing": "https://www.bing.com/search/",
+					"ask" :"https://www.ask.com/web/"
+			};
+			let actionKey = querySelect.value;
+			let url = actions[actionKey];
+			let form = document.getElementById('searchForm');
+			form.setAttribute("action",url);
+			
+			
+		}
+		
+    	window.addEventListener("load", function(){
         // TODO: register the handler
-    });
+		//let form = document.getElementById('searchForm');
+		//form.addEventListener("submit", setSearchEngine);
+		
+		let submitBtn = document.getElementById('submit');
+		submitBtn.addEventListener('click',setSearchEngine)
+		
+
+		
+		});
+		
+
+
 	</script>
 </head>
 
@@ -14,6 +51,17 @@
 
 	<form id="searchForm">
     <!-- TODO: add form elements -->
-	</form>
+
+	<!--form action="https://handlers.education.launchcode.org/request-parrot" method="post"-->
+		<input type = "text" id = text_id; name = "q">
+		<label><input type = "radio" id = "googleId" name = "engine" value = "google"/>Google</label>
+		<label><input type = "radio" id = "duckId" name = "engine" value = "duckDuckGo"/>DuckDuckGo</label>
+		<label><input type = "radio" id = "bingId" name = "engine" value = "bing"/>Bing</label>
+		<label><input type = "radio" id = "askId" name = "engine" value="ask"/>Ask</label>
+		<input type = "submit" id ="submit" value = "Go!">
+	 
+	
+	 </form>
+	
 
 </body>
